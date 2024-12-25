@@ -5,6 +5,7 @@ import ParallaxScrollView from "@/components/ParallaxScrollView";
 import { ThemedText } from "@/components/ThemedText";
 import { ThemedView } from "@/components/ThemedView";
 import { ExternalLink } from "@/components/ExternalLink";
+import { Link } from "expo-router";
 
 export default function HomeScreen() {
   return (
@@ -56,7 +57,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <ThemedView>
-        <ExternalLink href="(auth)">Auth</ExternalLink>
+        <Link href={"/(auth)"}>Auth</Link>
       </ThemedView>
     </ParallaxScrollView>
   );
