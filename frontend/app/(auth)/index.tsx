@@ -8,7 +8,7 @@ const LoginScreen = () => {
   const navigation = useRouter();
 
   const handlePress = () => {
-    console.log("btn pressed!");
+    navigation.push("/(tabs)");
   };
 
   return (
