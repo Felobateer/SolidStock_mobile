@@ -4,10 +4,10 @@ const roboto = "Roboto";
 
 // Text styles
 export const textStyles = {
-  heading: "text-2xl font-bold text-gray-900 font-[Poppins]",
-  subHeading: "text-xl font-semibold text-gray-700 font-[Roboto]",
-  body: "text-base text-gray-600 font-[Roboto]",
-  caption: "text-sm text-gray-500 font-[Roboto]",
+  heading: "text-2xl font-bold text-gray-200 font-[Poppins]",
+  subHeading: "text-xl font-semibold text-gray-300 font-[Roboto]",
+  body: "text-lg text-gray-300 font-[Roboto]",
+  caption: "text-sm text-gray-400 font-[Roboto]",
   overline: "text-xs uppercase tracking-widest text-gray-400 font-[Roboto]",
 };
 
@@ -53,12 +53,12 @@ export const imageStyles = {
 
 // Common layout styles
 export const layoutStyles = {
-  row: "flex-row items-center justify-between",
+  row: "flex flex-row items-center justify-between w-full px-7",
   column: "flex-col items-start",
   center: "flex items-center justify-center",
   spaceBetween: "flex justify-between",
   spaceAround: "flex justify-around",
-  card: "bg-white shadow-md rounded-lg p-4",
+  card: "rounded-lg p-4",
   container: "px-4 py-6",
 };
 

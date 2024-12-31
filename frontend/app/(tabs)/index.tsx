@@ -7,90 +7,135 @@ import {
   TouchableOpacity,
 } from "react-native";
 import nativeStyle from "../styles";
-import { HelloWave } from "@/components/HelloWave";
 import ParallaxScrollView from "@/components/ParallaxScrollView";
-import { ThemedText } from "@/components/ThemedText";
-import { ThemedView } from "@/components/ThemedView";
-import { ExternalLink } from "@/components/ExternalLink";
+
+export interface Stock {
+  img: string;
+  name: string;
+  sym: string;
+  price: number;
+}
 
 export default function HomeScreen() {
+  const stocks: Stock[] = [
+    {
+      img: "	https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AAPL.png",
+      name: "Apple Inc",
+      sym: "AAPL",
+      price: 252.2,
+    },
+    {
+      img: "	https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/GOOG.png",
+      name: "Alphabet Inc",
+      sym: "GOOG",
+      price: 191.24,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/MSFT.png",
+      name: "Microsoft Corp",
+      sym: "MSFT",
+      price: 424.83,
+    },
+    {
+      img: "	https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/AMZN.png",
+      name: "Amazon.com Inc",
+      sym: "AMZN",
+      price: 221.3,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/TSLA.png",
+      name: "Tesla Inc",
+      sym: "TSLA",
+      price: 417.41,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/NVDA.png",
+      name: "NVIDIA Corp",
+      sym: "NVDA",
+      price: 137.49,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/JPM.png",
+      name: "JPMorgan Chase & Co",
+      sym: "JPM",
+      price: 239.32,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/V.png",
+      name: "Visa Inc",
+      sym: "V",
+      price: 315.31,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/WMT.png",
+      name: "Walmart Inc",
+      sym: "WMT",
+      price: 90.57,
+    },
+    {
+      img: "https://static2.finnhub.io/file/publicdatany/finnhubimage/stock_logo/JNJ.png",
+      name: "Johnson & Johnson",
+      sym: "JNJ",
+      price: 143.34,
+    },
+  ];
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+      headerBackgroundColor={{ light: "#1f2937", dark: "#1D3D47" }}
       headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
+        <View className={nativeStyle.layoutStyles.center + "my-5 py-10 gap-6"}>
+          <View className={nativeStyle.layoutStyles.row}>
+            <View className={nativeStyle.layoutStyles.card + "flex-1 mr-20"}>
+              <Text className={nativeStyle.textStyles.heading}>
+                Hi, Welcome Back
+              </Text>
+              <Text className={nativeStyle.textStyles.subHeading}>
+                Good Morning
+              </Text>
+            </View>
+            <TouchableOpacity className={nativeStyle.buttonStyles.disabled}>
+              {/* <Image
+                className={nativeStyle.imageStyles.avatar}
+                source={require("@/assets/images/solidstockheader.PNG")}
+              /> */}
+              <Text className={nativeStyle.textStyles.caption}>logo</Text>
+            </TouchableOpacity>
+          </View>
+          <View className={nativeStyle.layoutStyles.row}>
+            <View className={nativeStyle.layoutStyles.column}>
+              <Text className={nativeStyle.textStyles.body}>Total Balance</Text>
+              <Text className={nativeStyle.textStyles.heading}>$4,763.00</Text>
+            </View>
+            <View className="w-1 h-[30px] border-l border-gray-300 shadow-lg shadow-gray-400 mx-10" />
+            <View className={nativeStyle.layoutStyles.column}>
+              <Text className={nativeStyle.textStyles.body}>Profits</Text>
+              <Text className={nativeStyle.textStyles.heading}>+$723.00</Text>
+            </View>
+          </View>
+          <View className={nativeStyle.layoutStyles.center + "flex gap-3"}>
+            <Text className={nativeStyle.textStyles.overline}>
+              The market is currently open
+            </Text>
+            <Text className={nativeStyle.textStyles.overline + "py-3"}>
+              Your most profitable stock is AAPL
+            </Text>
+          </View>
+        </View>
       }
     >
-      <View>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText type="title">Welcome!</ThemedText>
-          <TouchableOpacity className={nativeStyle.buttonStyles.primary}>
-            <Text className={nativeStyle.textStyles.heading}>test</Text>
-          </TouchableOpacity>
-          <HelloWave />
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-          <ThemedText>
-            Edit{" "}
-            <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText>{" "}
-            to see changes. Press{" "}
-            <ThemedText type="defaultSemiBold">
-              {Platform.select({
-                ios: "cmd + d",
-                android: "cmd + m",
-                web: "F12",
-              })}
-            </ThemedText>{" "}
-            to open developer tools.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          <ThemedText>
-            Tap the Explore tab to learn more about what's included in this
-            starter app.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView style={styles.stepContainer}>
-          <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-          <ThemedText>
-            When you're ready, run{" "}
-            <ThemedText type="defaultSemiBold">
-              npm run reset-project
-            </ThemedText>{" "}
-            to get a fresh <ThemedText type="defaultSemiBold">app</ThemedText>{" "}
-            directory. This will move the current{" "}
-            <ThemedText type="defaultSemiBold">app</ThemedText> to{" "}
-            <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-          </ThemedText>
-        </ThemedView>
-        <ThemedView>
-          <ExternalLink href="(auth)">Auth</ExternalLink>
-        </ThemedView>
+      <View className={nativeStyle.layoutStyles.center}>
+        {stocks.map((stock: Stock) => {
+          return (
+            <View className={nativeStyle.layoutStyles.row} key={stock.sym}>
+              <Image source={{ uri: stock.img }} />
+              <Text className={nativeStyle.textStyles.body}>{stock.name}</Text>
+              <Text className={nativeStyle.textStyles.body}>{stock.sym}</Text>
+              <Text className={nativeStyle.textStyles.body}>{stock.price}</Text>
+            </View>
+          );
+        })}
       </View>
     </ParallaxScrollView>
   );
 }
-
-const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
-  },
-});
