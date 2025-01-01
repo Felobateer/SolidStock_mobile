@@ -55,7 +55,7 @@ export const imageStyles = {
 export const layoutStyles = {
   row: "flex flex-row items-center justify-between w-full px-7",
   column: "flex-col items-start",
-  center: "flex items-center justify-center",
+  center: "flex items-center justify-center w-full bg-gray-800",
   spaceBetween: "flex justify-between",
   spaceAround: "flex justify-around",
   card: "rounded-lg p-4",

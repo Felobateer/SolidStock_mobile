@@ -10,28 +10,32 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const tabBarTintColor = Colors[colorScheme ?? "light"]?.tint || "#007AFF"; // Default fallback
+  const tabBarTintColor = "#1f2937";
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: tabBarTintColor,
+        tabBarActiveTintColor: "#d1d5db", // Active tab color
+        tabBarInactiveTintColor: "#7c7c7c", // Inactive tab color (optional)
         headerShown: false,
-        tabBarButton: HapticTab,
-        tabBarBackground: TabBarBackground,
-        tabBarStyle: Platform.select({
-          ios: {
-            position: "absolute",
-            bottom: 0,
-            left: 0,
-            right: 0,
-            height: 60 + 10,
-            paddingBottom: 10,
-          },
-          default: {
-            height: 60,
-          },
-        }),
+        tabBarButton: HapticTab, // Custom button (ensure HapticTab is defined)
+        tabBarStyle: {
+          backgroundColor: tabBarTintColor, // Tab bar background color
+          borderTopWidth: 0, // Optional: Remove border on top of the tab bar
+          ...Platform.select({
+            ios: {
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: 70, // Total height (tab bar + padding)
+              paddingBottom: 10, // Additional padding on iOS
+            },
+            default: {
+              height: 60, // Default height for other platforms
+            },
+          }),
+        },
       }}
     >
       <Tabs.Screen
@@ -39,7 +43,7 @@ export default function TabLayout() {
         options={{
           title: "Home",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="house.fill" color={color} />
+            <IconSymbol size={28} name="house.fill" color={"#cbb26a"} />
           ),
         }}
       />
@@ -48,7 +52,7 @@ export default function TabLayout() {
         options={{
           title: "Market",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="chart.fill" color={color} />
+            <IconSymbol size={28} name="chart.fill" color={"#cbb26a"} />
           ),
         }}
       />
@@ -57,7 +61,7 @@ export default function TabLayout() {
         options={{
           title: "Portfolio",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="case.fill" color={color} />
+            <IconSymbol size={28} name="case.fill" color={"#cbb26a"} />
           ),
         }}
       />
@@ -66,7 +70,7 @@ export default function TabLayout() {
         options={{
           title: "Account",
           tabBarIcon: ({ color }) => (
-            <IconSymbol size={28} name="user.fill" color={color} />
+            <IconSymbol size={28} name="user.fill" color={"#cbb26a"} />
           ),
         }}
       />

@@ -12,6 +12,7 @@ const MAPPING = {
   "user.fill": "person",
   "case.fill": "work",
   "chart.fill": "pie-chart",
+  "bell.fill": "notifications",
   "chevron.left.forwardslash.chevron.right": "code",
   "chevron.right": "chevron-right",
 } as unknown as Partial<
