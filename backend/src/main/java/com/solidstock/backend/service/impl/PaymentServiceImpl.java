@@ -1,5 +1,7 @@
 package com.solidstock.backend.service.impl;
 
+import com.solidstock.backend.exception.InsufficientFundsException;
+import com.solidstock.backend.exception.ResourceNotFoundException;
 import com.solidstock.backend.model.dto.TransferRequestDto;
 import com.solidstock.backend.model.dto.TransferResponseDto;
 import com.solidstock.backend.model.entity.Account;
@@ -20,19 +22,25 @@ public class PaymentServiceImpl implements PaymentService {
         String destinationAccountNumber = transferRequestDto.getDestinationAccountNumber();
         Double amount = transferRequestDto.getAmount();
 
-        if (amount <= 0) {
+        // Validate amount
+        if (amount == null || amount <= 0) {
             throw new IllegalArgumentException("Transfer amount must be greater than zero");
         }
 
+        // Find source and destination accounts
         Account sourceAccount = accountRepository.findByAccountNumber(sourceAccountNumber);
-        Account destinationAccount = accountRepository.findByAccountNumber(destinationAccountNumber);
-
-        if (sourceAccount == null || destinationAccount == null) {
-            throw new RuntimeException("One or both accounts not found");
+        if (sourceAccount == null) {
+            throw new ResourceNotFoundException("Source account not found with account number: " + sourceAccountNumber);
         }
 
+        Account destinationAccount = accountRepository.findByAccountNumber(destinationAccountNumber);
+        if (destinationAccount == null) {
+            throw new ResourceNotFoundException("Destination account not found with account number: " + destinationAccountNumber);
+        }
+
+        // Check sufficient funds
         if (sourceAccount.getBalance() < amount) {
-            throw new RuntimeException("Insufficient funds in source account");
+            throw new InsufficientFundsException("Insufficient funds in source account with account number: " + sourceAccountNumber);
         }
 
         // Perform the transfer
@@ -52,4 +60,5 @@ public class PaymentServiceImpl implements PaymentService {
                 destinationAccount.getBalance()
         );
     }
+
 }

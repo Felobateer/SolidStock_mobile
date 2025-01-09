@@ -1,5 +1,6 @@
 package com.solidstock.backend.service.impl;
 
+import com.solidstock.backend.exception.ResourceNotFoundException;
 import com.solidstock.backend.mapper.UserMapper;
 import com.solidstock.backend.model.dto.LoginRequest;
 import com.solidstock.backend.model.dto.LoginResponse;
@@ -32,13 +33,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto getUserById(Long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        User user = userRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("User not found with id: " + id));
         return UserMapper.mapToUserDto(user);
     }
 
     @Override
     public UserDto updateUserData(Long id, UserDto userDto) {
-        User existingUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException(("User not found")));
+        User existingUser = userRepository.findById(id).orElseThrow(()
+                -> new ResourceNotFoundException("User not found with id: " + id));
 
 
         existingUser.setFirstName(userDto.getFirstName());
@@ -60,7 +63,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUserData(Long id) {
         User formerUser = userRepository.findById(id).orElseThrow(()
-                -> new RuntimeException(("User not found")));
+                -> new ResourceNotFoundException("User not found with id: " + id));
         userRepository.delete(formerUser);
     }
 

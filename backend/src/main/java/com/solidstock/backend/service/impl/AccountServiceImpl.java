@@ -1,5 +1,6 @@
 package com.solidstock.backend.service.impl;
 
+import com.solidstock.backend.exception.ResourceNotFoundException;
 import com.solidstock.backend.mapper.AccountMapper;
 import com.solidstock.backend.model.dto.AccountDto;
 import com.solidstock.backend.model.dto.OpenAccountRequest;
@@ -50,11 +51,11 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public List<AccountDto> getUserAccounts(Long userId) {
         User user = userRepository.findById(userId).orElseThrow(() ->
-                new RuntimeException("User with ID " + userId + " not found"));
+                 new ResourceNotFoundException("User not found with id: " + userId));
 
         List<Account> accounts = accountRepository.findByUser(user);
         if (accounts.isEmpty()) {
-            throw new RuntimeException("No accounts found for user with ID " + userId);
+            throw new ResourceNotFoundException("No accounts found for user with ID " + userId);
         }
 
         return accounts.stream()
@@ -65,7 +66,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountDto getAccountById(Long id) {
         Account account = accountRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Account with ID " + id + " not found"));
+                new ResourceNotFoundException("Account with ID " + id + " not found"));
 
         return AccountMapper.toDto(account);
     }
@@ -74,7 +75,7 @@ public class AccountServiceImpl implements AccountService {
     public AccountDto getAccountByAccountNumber(String accountNumber) {
         Account account = accountRepository.findByAccountNumber(accountNumber);
         if (account == null) {
-            throw new RuntimeException("Account with account number " + accountNumber + " not found");
+            throw new ResourceNotFoundException("Account with account number " + accountNumber + " not found");
         }
         return AccountMapper.toDto(account);
     }
@@ -88,7 +89,7 @@ public class AccountServiceImpl implements AccountService {
 
         Account newAccount = new Account();
         User user = userRepository.findById(openAccountRequest.getUserId()).orElseThrow(() ->
-                new RuntimeException("User with ID " + openAccountRequest.getUserId() + " not found"));
+                new ResourceNotFoundException("User with ID " + openAccountRequest.getUserId() + " not found"));
 
         newAccount.setUser(user);
         newAccount.setAccountType(openAccountRequest.getAccountType());
@@ -104,7 +105,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public void deleteAccount(Long id) {
         Account account = accountRepository.findById(id).orElseThrow(() ->
-                new RuntimeException("Account with ID " + id + " not found"));
+                new ResourceNotFoundException("Account with ID " + id + " not found"));
         accountRepository.delete(account);
     }
 }
