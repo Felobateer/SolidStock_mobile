@@ -11,6 +11,7 @@ import com.solidstock.backend.repository.UserRepository;
 import com.solidstock.backend.service.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -23,6 +24,8 @@ public class AccountServiceImpl implements AccountService {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     public Account createAccount(Long userId, String accountNumber, String accountType, Double balance) {
@@ -57,6 +60,8 @@ public class AccountServiceImpl implements AccountService {
         if (accounts.isEmpty()) {
             throw new ResourceNotFoundException("No accounts found for user with ID " + userId);
         }
+
+        List<AccountDto> = restTemplate.getForObject(dotenv.secondary_instance, List<AccountDto>.class);
 
         return accounts.stream()
                 .map(AccountMapper::toDto)

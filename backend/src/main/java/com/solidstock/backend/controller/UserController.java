@@ -5,6 +5,7 @@ import com.solidstock.backend.model.dto.UserDto;
 import com.solidstock.backend.service.NotificationService;
 import com.solidstock.backend.service.UserService;
 import com.solidstock.backend.exception.ResourceNotFoundException;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

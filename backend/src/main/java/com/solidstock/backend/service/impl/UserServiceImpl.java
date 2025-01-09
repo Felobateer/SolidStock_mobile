@@ -10,6 +10,7 @@ import com.solidstock.backend.repository.UserRepository;
 import com.solidstock.backend.service.UserService;
 import com.solidstock.backend.config.SecurityConfig;
 import com.solidstock.backend.utils.JwtUtils;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 
@@ -32,6 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Cacheable(value = "users", key = "#id")
     public UserDto getUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(()
                 -> new ResourceNotFoundException("User not found with id: " + id));
