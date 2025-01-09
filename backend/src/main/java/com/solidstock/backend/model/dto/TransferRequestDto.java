@@ -11,4 +11,5 @@ public class TransferRequestDto {
     private String sourceAccountNumber;
     private String destinationAccountNumber;
     private Double amount;
+    private String message;
 }
