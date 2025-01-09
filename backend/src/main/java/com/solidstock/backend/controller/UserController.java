@@ -20,7 +20,8 @@ public class UserController {
     // sign up
     @PostMapping
     public ResponseEntity<UserDto> signUp(@RequestBody UserDto userDto) {
-        return new ResponseEntity<>(userService.createUser(userDto), HttpStatus.CREATED);
+        return new ResponseEntity<>(userService.createUser(userDto),
+                HttpStatus.CREATED);
     }
 
     // Get user details

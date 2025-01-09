@@ -59,14 +59,16 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUserData(Long id) {
-        User formerUser = userRepository.findById(id).orElseThrow(() -> new RuntimeException(("User not found")));
+        User formerUser = userRepository.findById(id).orElseThrow(()
+                -> new RuntimeException(("User not found")));
         userRepository.delete(formerUser);
     }
 
     @Override
     public List<UserDto> getAllUsers() {
         List<User> users = userRepository.findAll();
-        return users.stream().map((user) -> UserMapper.mapToUserDto(user)).collect(Collectors.toList());
+        return users.stream().map((user) ->
+                UserMapper.mapToUserDto(user)).collect(Collectors.toList());
     }
 
     @Override
